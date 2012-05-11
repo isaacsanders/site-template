@@ -1,3 +1,6 @@
+- content_for :title do
+  = 'Bike Parking in Washington, D.C.'
+
 - content_for :javascripts do
   = include_javascript :mustache
   = include_javascript "http://maps.google.com/maps/api/js?sensor=false" 
@@ -6,15 +9,16 @@
 
   :javascript
     (function() {
-      var us_centroid = new google.maps.LatLng(37.09024,-95.712891);
-      var tableId = "1c4TAG-E7o-GJIRBUON-onVtLVft5IAr82mdqj7M"; // Open Data
+      var us_centroid = new google.maps.LatLng(38.895111, -77.036667);
+      var tableId = "1bCfcaKdgCw64PrwF7O6Sjngxjq4uiLYqMSbEgIU"; // Open Data
       //var tableId = "1141224"
       var filters = [
-        {"City Search":  {columns: ["city"],  type: "text"}},
-        {"State Search": {columns: ["state"], type: "text"}}
+        {"Fuzzy Find by Address":  {columns: ["Address"],  type: "text"}},
+        {"Fuzzy Find by Facility": {columns: ["Facility"], type: "text"}},
+        {"Department": {columns: ["Department"], type: "select"}}
       ];
 
-      map = new Fusion.Map("template_map", {center: us_centroid, zoom: 4, mapTypeControl: true});
+      map = new Fusion.Map("template_map", {center: us_centroid, zoom: 12, mapTypeControl: true});
       var layer = map.layers.create({select: "geometry", from: tableId});
       map.present();
 
